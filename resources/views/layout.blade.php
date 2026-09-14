@@ -7,5 +7,6 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
     </head>
     <body>
+        
     </body>
 </html>
