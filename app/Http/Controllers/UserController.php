@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\UserRegisterRequest;
+use App\Http\Requests\UserRegisterRequest;
+use App\Http\Requests\UserLoginRequest;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -27,9 +29,23 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function login()
+    public function login(UserLoginRequest $request)
     {
-        
+        $user = User::where('email', $request->email)->first();
+       if ($user) {
+            if (Hash::check($request->password, $user->password)) {
+                Auth::login($user);
+                return response()->json(['message' => 'ok', "token" => $user->createToken('api')->plainTextToken], 200);
+            }
+        }
+        return response()->json(['message' => 'пользователь не найден', 'errors' => ["password" => ['пользователь не найден']]], 404);
+    }
+
+      public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json(["mesage" => "ok"], 200);
+       
     }
 
     /**
