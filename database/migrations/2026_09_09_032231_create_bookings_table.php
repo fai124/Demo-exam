@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->string('nameroom');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('room_id')->constrained()->onDelete('cascade');
             $table->date('date');
             $table->enum('payment', ['cash', 'sbp']);
+            $table->enum('status', ['new', 'confirmed', 'completed'])->default('new');
             $table->timestamps();
         });
     }

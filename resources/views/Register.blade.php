@@ -1,16 +1,52 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-       
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Конференции.РФ — Регистрация</title>
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Регистрация</h2>
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
-    </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
-        <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
-        </header>
-        <form action="">
-            
+        <form action="{{ route('register') }}" method="POST">
+            @csrf
+
+            <label for="login">Логин</label>
+            <input type="text" name="login" id="login" placeholder="латиница и цифры, от 6 символов" value="{{ old('login') }}">
+            @error('login')
+                <span class="error-message">{{ $message }}</span>
+            @enderror
+
+            <label for="password">Пароль</label>
+            <input type="password" name="password" id="password" placeholder="минимум 8 символов">
+            @error('password')
+                <span class="error-message">{{ $message }}</span>
+            @enderror
+
+            <label for="FIO">ФИО</label>
+            <input type="text" name="FIO" id="FIO" placeholder="Иванов Иван Иванович" value="{{ old('FIO') }}">
+            @error('FIO')
+                <span class="error-message">{{ $message }}</span>
+            @enderror
+
+            <label for="number">Телефон</label>
+            <input type="text" name="number" id="number" placeholder="8(XXX)XXX-XX-XX" value="{{ old('number') }}">
+            @error('number')
+                <span class="error-message">{{ $message }}</span>
+            @enderror
+
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" placeholder="example@mail.ru" value="{{ old('email') }}">
+            @error('email')
+                <span class="error-message">{{ $message }}</span>
+            @enderror
+
+            <button type="submit">Создать пользователя</button>
         </form>
-        </div>
-    </body>
+
+        <p class="link">Уже есть аккаунт? <a href="{{ route('login') }}">Войти</a></p>
+    </div>
+</body>
 </html>

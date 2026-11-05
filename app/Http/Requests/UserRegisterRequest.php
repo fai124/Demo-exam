@@ -12,23 +12,17 @@ class UserRegisterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            'name' => 'required',
+            'login' => 'required|min:6|unique:users,login',
+            'password' => 'required|min:8',
             'FIO' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:3',
-            'login' => 'required|min:3|unique:users',
-            'number'=> 'required',
+            'number' => 'required|integer|max:11',
+            'email' => 'required|email|unique:users,email',
         ];
     }
 }
