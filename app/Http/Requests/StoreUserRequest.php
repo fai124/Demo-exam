@@ -12,7 +12,7 @@ class StoreUserRequest extends FormRequest
             'login' => 'required|min:6|unique:users,login',
             'password' => 'required|min:8',
             'FIO' => 'required',
-            'number' => 'required|integer|max:11',
+            'number' => 'required|integer',
             'email' => 'required|email|unique:users,email',
         ];
     }

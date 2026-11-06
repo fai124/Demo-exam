@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\UserLoginRequest;
+use App\Http\Requests\UserRegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +16,7 @@ class UserController extends Controller
         return view('register');
     }
 
-    public function register(StoreUserRequest $request)
+    public function register(UserRegisterRequest $request)
     {
         $user = new User();
         $user->name = $request->login;
@@ -36,7 +36,7 @@ class UserController extends Controller
         return view('login');
     }
 
-    public function login(UpdateUserRequest $request)
+    public function login(UserLoginRequest $request)
     {
         $user = User::where('login', $request->login)->first();
 
