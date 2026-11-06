@@ -10,58 +10,45 @@ use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
-    public function create()
-    {
+    public function booking_add(){
         $rooms = Room::all();
-        return view('booking.create', compact('rooms'));
+        return view("booking_create", compact("rooms"));
     }
-
-    public function store(BookingRequest $request)
-    {
+    public function booking_addform(BookingRequest $request){
         $booking = new Booking();
-        $booking->user_id = Auth::id();
-        $booking->room_id = $request->room_id;
-        $booking->date = $request->date;
-        $booking->payment = $request->payment;
-        $booking->status = 'new';
+        $booking -> user_id = Auth::user()->id;
+        $booking -> room_id = $request->room_id;
+        $booking -> date = $request->date;
+        $booking -> payment = $request->payment;
+        $booking -> status = "new";
         $booking->save();
-
-        return redirect()->route('dashboard')->with('success', 'Заявка отправлена');
+        // return redirect()->route("dashboard");
+        return redirect()->route("dashboard");
     }
-
-    public function index()
-    {
-        $bookings = Booking::with(['user', 'room'])->get();
-        return view('booking.admin', compact('bookings'));
+    public function booking_admin(){
+        $bookings = Booking::with("user","room")->get();
+        return view("booking_admin", compact("bookings"));
     }
-
-    public function updateStatus(Request $request, Booking $booking)
-    {
-        if (Auth::user()->login !== 'Conf2027') {
-            return redirect()->route('dashboard');
+    public function booking_update_status(Request $request, Booking $booking){
+        if(Auth::user()->role !== "admin"){
+            return redirect()->route("dashboard");
         }
-
-        $booking->status = $request->status;
+        $booking -> status = $request->status;
         $booking->save();
-
-        return redirect()->route('booking.admin')->with('success', 'Статус обновлён');
+        // return back();
+        return redirect()->route("booking.admin");
     }
-
-    public function myBookings()
-    {
-        $bookings = Booking::where('user_id', Auth::id())->with('room')->get();
-        return view('booking.my', compact('bookings'));
+    public function booking_list(){
+        $bookings = Booking::where("user_id", Auth::user()->id)->with("room")->get();
+        return view("booking_my", compact("bookings"));
     }
-
-    public function storeReview(Request $request, Booking $booking)
-    {
-        if ($booking->user_id !== Auth::id() || $booking->status !== 'completed') {
-            return redirect()->route('booking.my');
+    public function booking_review(Request $request, Booking $booking){
+        if($booking -> user_id !== Auth::user()->id || $booking -> status !== "completed"){
+            return redirect()->route("booking.my");
         }
-
-        $booking->review = $request->review;
+        $booking -> comment = $request->comment;
         $booking->save();
-
-        return redirect()->route('booking.my')->with('success', 'Отзыв сохранён');
+        // return back();
+        return redirect()->route("booking.my");
     }
 }

@@ -137,3 +137,19 @@ body {
     margin: 5px 0;
     color: #555;
 }
+
+.btn-logout {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-logout:hover {
+    text-decoration: underline;
+}
+
+.form-inline {
+    display: inline;
+}

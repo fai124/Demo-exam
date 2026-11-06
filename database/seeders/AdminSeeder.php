@@ -20,6 +20,7 @@ class AdminSeeder extends Seeder
             $admin->FIO = 'Администратор портала';
             $admin->number = '8(000)000-00-00';
             $admin->email = 'admin@conference.ru';
+            $admin -> role = 'admin';
             $admin->save();
         }
     }

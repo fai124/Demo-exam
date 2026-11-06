@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('bookings', function (Blueprint $table) {
@@ -18,14 +15,11 @@ return new class extends Migration
             $table->date('date');
             $table->enum('payment', ['cash', 'sbp']);
             $table->enum('status', ['new', 'confirmed', 'completed'])->default('new');
-            $table->text('review')->nullable();
+            $table->string('comment')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('bookings');
