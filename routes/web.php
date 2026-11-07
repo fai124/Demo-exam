@@ -18,7 +18,7 @@ Route::post('/login', [UserController::class, 'login']);
 
 Route::post('/logout', [UserController::class, 'logout'])->name("logout");
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware("auth")->name("dashboard");
+Route::get('/dashboard', [DashboardController::class, 'index'])->name("dashboard");
 
 Route::get('/room/create', [RoomController::class, 'room_add'])->name("room.create")->middleware("auth");
 Route::post('/room/store', [RoomController::class, 'room_addform'])->name("room.store")->middleware("auth");

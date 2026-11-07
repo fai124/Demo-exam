@@ -10,7 +10,6 @@ class RoomRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'price' => 'required|integer',
         ];
     }
 }

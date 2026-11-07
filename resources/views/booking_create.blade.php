@@ -17,7 +17,7 @@
     <select name="room_id" id="room_id">
         <option value="">Выберите помещение</option>
         @foreach ( $rooms as $room )
-        <option value="{{ $room->id }}">{{ $room->name }} ({{ $room->price }} руб)</option>
+        <option value="{{ $room->id }}">{{ $room->name }}</option>
         @endforeach
     </select>
     @error('room_id')

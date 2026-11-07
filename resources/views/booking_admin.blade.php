@@ -7,9 +7,12 @@
 <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 </head>
 <body>
+<a href="{{ Route('dashboard') }}">
 <div class="header">
+<img class="photo" src="{{ asset('storage\imgbin-orange.jpg') }}" alt="1">
 <h1>Конференции.РФ</h1>
 <div>
+</a>
 <span>{{ Auth::user()->FIO }}</span>
 <form action="{{ Route('logout') }}" method="POST" class="form-inline">
 @csrf

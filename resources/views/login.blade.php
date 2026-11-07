@@ -7,6 +7,12 @@
 <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
 </head>
 <body>
+<a href="{{ Route('dashboard') }}">
+<div class="header">
+<h1>Конференции.РФ</h1>
+<div>
+</a>
+<br>
 <div class="form-container">
 <h2>Авторизация</h2>
 

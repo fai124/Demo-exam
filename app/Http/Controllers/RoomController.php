@@ -23,7 +23,6 @@ class RoomController extends Controller
         }
         $room = new Room();
         $room -> name = $request->name;
-        $room -> price = $request->price;
         $room->save();
         // return back();
         return redirect()->route("dashboard");

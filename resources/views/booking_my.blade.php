@@ -7,9 +7,12 @@
 <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 </head>
 <body>
+<a href="{{ Route('dashboard') }}">
 <div class="header">
+<img class="photo" src="{{ asset('storage\imgbin-orange.jpg') }}" alt="1">
 <h1>Конференции.РФ</h1>
 <div>
+</a>
 <span>{{ Auth::user()->FIO }}</span>
 <form action="{{ Route('logout') }}" method="POST" class="form-inline">
 @csrf
@@ -41,8 +44,8 @@
 @if ( $booking->status == 'completed' && !$booking->comment )
 <form action="{{ Route('booking.review', $booking) }}" method="POST">
 @csrf
-<textarea name="comment" placeholder="Оставьте отзыв о мероприятии" rows="3"></textarea>
-<button type="submit" class="btn-submit">Отправить отзыв</button>
+<textarea name="comment" placeholder="отзыв" rows="3"></textarea>
+<button type="submit" class="btn-submit">Отправить/button>
 </form>
 @endif
 

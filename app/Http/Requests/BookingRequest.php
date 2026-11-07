@@ -10,7 +10,7 @@ class BookingRequest extends FormRequest
     {
         return [
             'room_id' => 'required',
-            'date' => 'required',
+            'date' => 'required|date|after_or_equal:today',
             'payment' => 'required',
         ];
     }

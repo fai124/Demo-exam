@@ -18,13 +18,6 @@
 @error('name')
 <div class="error-message">{{ $message }}</div>
 @enderror
-
-<label for="price">Стоимость</label>
-<input type="number" name="price" id="price" placeholder="Введите стоимость" value="{{ old('price') }}">
-@error('price')
-<div class="error-message">{{ $message }}</div>
-@enderror
-
 <button type="submit">Создать зал</button>
 </form>
 
